@@ -1,0 +1,20 @@
+﻿# Ignorar carpeta .git
+.git/
+
+# Ignorar carpeta .vs
+.vs/
+
+# Ignorar carpeta dist
+dist/
+
+# Ignorar archivo config.json
+config.json
+
+# Ignorar archivo error.log
+error.log 
+
+# Ignorar carpeta dist
+dist
+
+# Ignorar archivo pp.spec
+pp.spec
