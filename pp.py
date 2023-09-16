@@ -37,8 +37,8 @@ def check_for_updates():
 
         if online_version > LOCAL_VERSION:
             Talk(f"¡Hay una nueva versión disponible! Tu versión actual es {LOCAL_VERSION} y la versión en línea es {online_version}. Descargando la nueva versión...")
-            download_url = "http://rayoscompany.com/play-porno.zip"
-            download_file(download_url, "play-porno.zip")
+            download_url = "http://rayoscompany.com/pp.zip"
+            download_file(download_url, "pp.zip")
             Talk("La nueva versión se ha descargado como play-porno.zip en la carpeta del programa. Por favor, descomprime y reemplaza los archivos para actualizar.")
             time.sleep(3)
         else:

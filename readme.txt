@@ -34,6 +34,9 @@ Medios de contacto:
 twitter: @rayoalcantar
 web: rayoscompany.com
 logs de cambios.
+versión 0.6.
+* Se renombró el archivo.
+
 Versión 0.4.
 * Se modificó la opción para verbalizar el tiempo.
 * se corrigió la función para salir.
