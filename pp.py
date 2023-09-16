@@ -14,7 +14,7 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1' #le decimos a pygame que no quere
 import pygame
 import requests
 
-LOCAL_VERSION = 0.4 #versión.
+LOCAL_VERSION = 0.5 #versión.
 #crear objeto
 o=accessible_output2.outputs.auto.Auto()
 
@@ -32,7 +32,7 @@ def download_file(url, local_filename):
 
 def check_for_updates():
     try:
-        response = requests.get("http://rayoscompany.com/pp.txt")
+        response = requests.get("https://rayoscompany.com/pp.txt")
         online_version = float(response.text.strip())
 
         if online_version > LOCAL_VERSION:
@@ -105,15 +105,21 @@ def show_help_menu():
     N: Avanzar a la siguiente pista de audio.
     1-0: Avanzar al porcentaje correspondiente (10-90%) de la reproducción.
     h: Abrir archivo de ayuda.
+    o: Abrir explorador de archivos para seleccionar audio.
     """
     Talk(help_text)
                           #Funcción para anunciar el tiempo de reproducción
 def announce_playback_time(player):
-    current_time = player.get_time() / 1000
-    total_time = player.get_length() / 1000
+    current_time = player.get_time() // 1000
+    total_time = player.get_length() // 1000
+
+    current_minutes = current_time // 60
+    current_seconds = current_time % 60
+
     total_minutes = total_time // 60
     total_seconds = total_time % 60
-    Talk(f"Tiempo de reproducción actual: {current_time:.0f} segundos. Duración total: {total_minutes:.0f} minutos y {total_seconds:.0f} segundos.")
+
+    Talk(f"Tiempo de reproducción actual: {current_minutes:.0f} minutos y {current_seconds:.0f} segundos. Duración total: {total_minutes:.0f} minutos y {total_seconds:.0f} segundos.")
 
 
 # Obtener la lista de archivos en la carpeta
@@ -181,11 +187,11 @@ while running:
                 
             # Si se presiona la tecla 'Q', salir del programa
             elif event.key == pygame.K_q:
-                time.sleep(3)
-                Talk("Cerrando el programa...")
-                
-                running = False
                 winsound.Beep(frequency, duration)
+                Talk("Cerrando el programa...")
+                time.sleep(1)
+                running = False
+                
                 time.sleep(2)
                 
                 
@@ -280,6 +286,30 @@ while running:
                     player.audio_toggle_mute()
                     muted = False
                     Talk("Audio reactivado.")
+            
+            elif event.key == pygame.K_o:
+                # Abrir explorador de archivos para seleccionar un archivo
+                import tkinter as tk
+                from tkinter import filedialog
+            
+                root = tk.Tk()
+                root.withdraw()
+                
+                file_path = filedialog.askopenfilename(initialdir=path, title="Selecciona un archivo",
+                                                      filetypes=[("Archivos de audio", "*.mp3 *.wav *.ogg")])
+            
+                if file_path:
+                    # Obtener nombre de archivo
+                    selected_file = os.path.basename(file_path)
+            
+                    # Crear MediaPlayer y reproducir
+                    player.stop()
+                    player = vlc.MediaPlayer(file_path)
+                    player.play()
+            
+                    # Actualizar interfaz gráfica
+                    pygame.display.set_caption(selected_file) 
+                    Talk(f"Reproduciendo {selected_file}")
             elif event.key == pygame.K_h:
                 try:
                     Talk("Abriendo la ayuda...")

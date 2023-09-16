@@ -18,6 +18,7 @@ Instrucciones de uso:
     - N: Saltar al siguiente archivo aleatorio
     - 1-0: Avanzar al porcentaje correspondiente de la reproducción (10%, 20%, ..., 90%)
     - M: Silenciar / activar el sonido
+   - O: Abrir explorador de archivos para seleccionar un audio.
     - F1: Mostrar el menú de ayuda con los atajos de teclado disponibles
 
 4. Para cerrar el programa, presione la tecla "Q".
@@ -33,6 +34,10 @@ Medios de contacto:
 twitter: @rayoalcantar
 web: rayoscompany.com
 logs de cambios.
+Versión 0.4.
+* Se modificó la opción para verbalizar el tiempo.
+* se corrigió la función para salir.
+
 versión 0.3:
 * se añadieron algunas funciones para actualizador automático.
 * se añadió tecla 0 para reiniciar el audio.
